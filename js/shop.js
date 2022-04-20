@@ -75,17 +75,37 @@ var total = 0;
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
+    let x = false;
+    let y = 0;
+
+    while ( x != true){
+
+        if ( id == products[y].id) {
+            x = true;
+            cartList.push(products[y].name, products[y].price);
+        } else {
+            y++;
+        }
+
+    }
+    console.log(cartList);
 }
 
 // Exercise 2
 function cleanCart() {
-
+    cartList.length = 0;
 }
-
+let totalPrice = 0;
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+        
+    for (let i in cartList) {
+        totalPrice += cartList[i].price;
+    }
+    return totalPrice;    
 }
+console.log( calculateTotal() );
 
 // Exercise 4
 function generateCart() {
