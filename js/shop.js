@@ -74,8 +74,8 @@ let total = 0;
 // Exercise 1
 function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
-  // 2. Add found product to the cartList array
   for (i = 0; i < products.length; i++) {
+    // 2. Add found product to the cartList array
     if (id == products[i].id) {
       cartList.push(products[i]);
       console.log(cartList);
@@ -91,7 +91,9 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
+  // for loop to add all the products picked
   for (let i = 0; i < cartList.length; i++) {
+    // sum of prices
     total += cartList[i].price;
   }
   return `The total price is $${total}`;
@@ -101,33 +103,32 @@ function calculateTotal() {
 function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-
-  cart = []; //so that every time the function is run, the cart starts empty
-  console.log(`Cart beginning state: ${cart}`);
-
+  //Initial state of the cart => empty
+  cart = [];
+  //for loop to iterate through the cartList array
   for (let i = 0; i < cartList.length; i++) {
-    
-    if (cart.length === 0){
+    //if cart is empty, push item into new array & add new key-value pair to object
+    if (cart.length === 0) {
       cart.push(cartList[i]);
-      cart[i]['quantity'] = 1
-
+      cart[i]["quantity"] = 1;
     } else {
-        let j = 0;
-        let idExists = false;
-        let idCartList = cartList[i].id;
-
-        while (j < cart.length && idExists === false)  {
-          if (cart[j].id === idCartList) {
-            cart[j].quantity++;
-            idExists = true;
-          }
-          j++
+      let j = 0;
+      let idExists = false;
+      //while loop to add quantities
+      while (j < cart.length && idExists === false) {
+        //if the product is already in cart, add 1 to quantity of that product
+        if (cart[j].id === cartList[i].id) {
+          cart[j].quantity++;
+          idExists = true;
         }
-        if (!idExists) {
-          cart.push(cartList[i]);
-          cart[cart.length -1]['quantity'] = 1;
-        }
-     }
+        j++;
+      }
+      //if cart is not empty but the product is not in cart, add product and its quantity
+      if (!idExists) {
+        cart.push(cartList[i]);
+        cart[cart.length - 1]["quantity"] = 1; // cart.lenght - 1 to avoid off-by-one error
+      }
+    }
   }
   return cart;
 }
