@@ -102,22 +102,34 @@ function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
 
-  cart = []; //so that every time the function is run, the cart is empty
+  cart = []; //so that every time the function is run, the cart starts empty
   console.log(`Cart beginning state: ${cart}`);
 
   for (let i = 0; i < cartList.length; i++) {
-    let chosenProduct = cartList[i]; // declare a variable with the item that has been selected
+    
+    if (cart.length === 0){
+      cart.push(cartList[i]);
+      cart[i]['quantity'] = 1
 
-    if (cart.includes(chosenProduct)) {
-      //if the selected item is already in cart...
-      let itemAlreadyInCart = cart.find((x) => x.id == chosenProduct.id); //find the item in cart and save it in a variable
-      itemAlreadyInCart.quantity++; //since it´s already in cart, we have to increase its quantity by one
     } else {
-      chosenProduct.quantity = 1;
-      cart.push(chosenProduct);
-    }
+        let j = 0;
+        let idExists = false;
+        let idCartList = cartList[i].id;
+
+        while (j < cart.length && idExists === false)  {
+          if (cart[j].id === idCartList) {
+            cart[j].quantity++;
+            idExists = true;
+          }
+          j++
+        }
+        if (!idExists) {
+          cart.push(cartList[i]);
+          cart[cart.length -1]['quantity'] = 1;
+        }
+     }
   }
-  console.log(`Cart after shopping: ${cart}`);
+  return cart;
 }
 
 // Exercise 5
