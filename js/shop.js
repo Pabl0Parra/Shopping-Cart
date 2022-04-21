@@ -1,4 +1,5 @@
-// If you have time, you can move this letiable "products" to a json file and load the data in this js. It will look more professional
+// import products from "./products";
+
 let products = [
   {
     id: 1,
@@ -63,6 +64,7 @@ let products = [
     type: "clothes",
   },
 ];
+
 // Array with products (objects) added directly with push(). Products in this array are repeated.
 let cartList = [];
 
@@ -75,7 +77,7 @@ let total = 0;
 function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
   for (i = 0; i < products.length; i++) {
-    // 2. Add found product to the cartList array
+    // 2. Add product to the cartList array when its button is clicked
     if (id == products[i].id) {
       cartList.push(products[i]);
       console.log(cartList);
@@ -103,11 +105,11 @@ function calculateTotal() {
 function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-  //Initial state of the cart => empty
+  // Initial state of the cart => empty
   cart = [];
-  //for loop to iterate through the cartList array
+  // for loop to iterate through the cartList array
   for (let i = 0; i < cartList.length; i++) {
-    //if cart is empty, push item into new array & add new key-value pair to object
+    // if cart is empty, push item into new array & add new key-value pair to object
     if (cart.length === 0) {
       cart.push(cartList[i]);
       cart[i]["quantity"] = 1;
