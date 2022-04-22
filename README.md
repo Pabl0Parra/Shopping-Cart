@@ -87,3 +87,23 @@ To access this screen, you must click on the cart icon at the top right of the s
 You can see that there is a form with the fields name, surname, email, password, address and telephone:
 
 ![checkout_form](./images/checkout-form.png)
+
+In this exercise you will have to implement the logic so that the form fields meet the following conditions:
+
+  - All fields are required.
+
+  - All fields must have at least 3 characters.
+
+  - The name and surname must contain only letters.
+
+  - The phone must contain only numbers.
+
+  - The password must include numbers and letters.
+
+  - The email must be in email format.
+
+When the user enters a field that does not meet the above conditions, the input should be highlighted in red and a message should be displayed at the bottom as feedback to the user, so that they know how to rectify it.
+
+Help: you can color the input border red and display the error message by manipulating the dom, but you can also use bootstrap's is-invalid class.
+
+In this link you have information that can help you to do the validation with JavaScript: https://www.w3schools.com/js/js_validation.asp
