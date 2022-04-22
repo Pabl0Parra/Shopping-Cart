@@ -10,7 +10,7 @@ The function you must complete is called buy() , which receives the id of the pr
 
 The buttons that must execute the buy() function are the blue ones found on each product:
 
-![image info](./pictures/image.png)
+![Grocery cart](./images/grocery-cart.png)
 
 To do this exercise and the following ones, you must not change the name of the functions or their input parameters, nor translate any of the data that is in English.
 
@@ -86,4 +86,4 @@ To access this screen, you must click on the cart icon at the top right of the s
 
 You can see that there is a form with the fields name, surname, email, password, address and telephone:
 
-![checkout_form](./pictures/image.png)
+![checkout_form](./images/checkout-form.png)
