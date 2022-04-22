@@ -78,7 +78,7 @@ Help: as each product in the cart has a quantity, you can now check if it has a 
 In case a product has a discount, the total price with discount must be saved in the field: subtotalWithDiscount.
 In case the discount should not be applied, you do not need to save anything.
 
-## Exercise 6
+### Exercise 6
 ---
 Until now, we have only implemented the logic of the main screen of the store. We will now implement the checkout form validation found in the checkout.js file.
 
