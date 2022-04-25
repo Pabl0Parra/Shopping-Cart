@@ -1,7 +1,7 @@
 // Get the input fields
 let password = document.getElementById("fPassword");
 let phone = document.getElementById("fPhone");
-let name = document.getElementById("fName");
+let firstName = document.getElementById("fName");
 let email = document.getElementById("fEmail");
 let lastName = document.getElementById("fLastN");
 let address = document.getElementById("fAddress");
@@ -14,19 +14,29 @@ let errorEmail = document.getElementById("errorEmail");
 let errorLastName = document.getElementById("errorLastN");
 
 // Exercise 6
-function validate() {
+function validate(e) {
   // Validate fields entered by the user: name, phone, password, and email
-
-  //Declare all fields to be tested with regular expressions
-  const REGEX_NAME = /[0-9]/;
-  const IS_OK_NAME = REGEX_NAME.test(fName.value);
-
-  const REGEX_LAST = /[0-9]/;
-  const IS_OK_LAST = REGEX_LAST.test(fLastN.value);
-
-  const REGEX_EMAIL = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-  const IS_OK_EMAIL = REGEX_EMAIL.test(fEmail.value);
-
-  const REGEX_PASSWORD = /^(?=[A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]{3,10}$/;
-  const IS_OK_PASSWORD = REGEX_PASSWORD.test(fPassword.value);
+ 
+  // First Name
+    // Check if it is three characters long
+    if (firstName.value.length < 3) {
+      errorName.classList.add('d-block');
+      errorName.classList.add('invalid-feedback');
+      errorName.innerHTML = 'Please, enter a name 3 characters long at least.';
+      firstName.classList.add('border-danger')
+    }
+    // Check if it contains numbers 
+    if (firstName.value.match(/\d+/g) != null) {
+        errorName.classList.add('d-block');
+        errorName.classList.add('invalid-feedback');
+        firstName.classList.add('border-danger');
+        errorName.innerHTML = "Numbers not allowed."
+    }
+    // Hide the error message if the above checks have been passed
+    if (firstName.value.length >= 3 && firstName.value.match(/\d+/g) == null) {
+            errorName.classList.remove('d-block')
+            firstName.classList.remove('border-danger');
+        }
+    }
+  
 }
