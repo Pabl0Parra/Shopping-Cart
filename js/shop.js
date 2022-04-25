@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-// import products from "./products";
-
 let products = [
   {
     id: 1,
@@ -65,16 +62,6 @@ let products = [
     type: "clothes",
   },
 ];
-=======
-// If you have time, you can move this letiable "products" to a json file and load the data in this js. It will look more professional
-import {products} from "./products.js"
-//added addEventListener in order for import/export to work
-const BUTTON1 = document.getElementById("1")
-BUTTON1.addEventListener("click", () => buy(1))
-
-const BUTTON2 = document.getElementById("2")
-BUTTON2.addEventListener("click", () => buy(2))
->>>>>>> 156a6ff535fec1d2805f239e458d2d09a58cf79b
 
 // Array with products (objects) added directly with push(). Products in this array are repeated.
 let cartList = [];
@@ -87,13 +74,9 @@ let total = 0;
 // Exercise 1
 function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
-<<<<<<< HEAD
-  for (i = 0; i < products.length; i++) {
-    // 2. Add product to the cartList array when its button is clicked
-=======
+
   for (let i = 0; i < products.length; i++) {
     // 2. Add found product to the cartList array
->>>>>>> 156a6ff535fec1d2805f239e458d2d09a58cf79b
     if (id == products[i].id) {
       cartList.push(products[i]);
       console.log(cartList);
@@ -111,7 +94,6 @@ function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
   // for loop to add all the products picked
   for (let i = 0; i < cartList.length; i++) {
-    
     total += cartList[i].price;
   }
   return `The total price is $${total}`;
@@ -121,30 +103,20 @@ function calculateTotal() {
 function generateCart() {
   // Using the "cartlist" array that contains all the items in the shopping cart,
   // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-<<<<<<< HEAD
-  // Initial state of the cart => empty
+
+  // Set initial state of the cart to empty
   cart = [];
   // for loop to iterate through the cartList array
-=======
-
-  //Initial state of the cart => empty
-  cart = [];
-  
-  //for loop to iterate through the cartList array
->>>>>>> 156a6ff535fec1d2805f239e458d2d09a58cf79b
   for (let i = 0; i < cartList.length; i++) {
     // if cart is empty, push item into new array & add new key-value pair to object
     if (cart.length === 0) {
-
       cart.push(cartList[i]);
       cart[i]["quantity"] = 1;
-      cart[i]['subtotal'] = cart[i].price * cart[i].quantity;
-
+      cart[i]["subtotal"] = cart[i].price * cart[i].quantity;
     } else {
-
       let j = 0;
       let idExists = false;
-      
+
       //while loop to add quantities
       while (j < cart.length && idExists === false) {
         //if the product is already in cart, add 1 to quantity of that product
@@ -157,7 +129,7 @@ function generateCart() {
       //if cart is not empty but the product is not in cart, add product and its quantity
       if (!idExists) {
         cart.push(cartList[i]);
-        cart[cart.length - 1]["quantity"] = 1; // cart.lenght - 1 to avoid off-by-one error        
+        cart[cart.length - 1]["quantity"] = 1; // cart.lenght - 1 to avoid off-by-one error
       }
     }
   }
@@ -168,26 +140,25 @@ function generateCart() {
 function applyPromotionsCart() {
   // Apply promotions to each item in the array "cart"
   if (generateCart().length > 0) {
-        
     // loop to itirate through the cart array
     for (let i = 0; i < cart.length; i++) {
-        //added the subtotal key to element
-        cart[i]['subtotal'] = cart[i].price * cart[i].quantity;
-        //discount conditions for item 1
-        if (cart[i].id === 1 && cart[i].quantity >= 3) {
-            cart[i]['subtotalWithDiscount'] = cart[i].quantity * 10;
-          //discount conditions for item 3  
-        } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
-            cart[i]['subtotalWithDiscount'] = Math.round(((cart[i].subtotal * 2) / 3) * 100) / 100;
-        }
-    }    
-} else {
+      //added the subtotal key to element
+      cart[i]["subtotal"] = cart[i].price * cart[i].quantity;
+      //discount conditions for item 1
+      if (cart[i].id === 1 && cart[i].quantity >= 3) {
+        cart[i]["subtotalWithDiscount"] = cart[i].quantity * 10;
+        //discount conditions for item 3
+      } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
+        cart[i]["subtotalWithDiscount"] =
+          Math.round(((cart[i].subtotal * 2) / 3) * 100) / 100;
+      }
+    }
+  } else {
     //in case product does not have a discount
-    alert("There is no discount for the selected item(s)")
+    alert("There is no discount for the selected item(s)");
+  }
+  return cart;
 }
-return cart
-} 
-
 
 // ** Nivell II **
 
