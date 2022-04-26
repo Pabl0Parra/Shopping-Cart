@@ -15,116 +15,118 @@ let errorLastName = document.getElementById("errorLastN");
 
 // Exercise 6
 
-//pass event argument to validate() to stop form from refreshing after submitting
+//pass event argument to "validate()" function to stop form from refreshing after submitting
 function validate(event) {
-  // Validate fields entered by the user: name, phone, password, and email
+  // Validate fields entered by the user: name, phone, password, email...
 
   // Prevents reloading the page when submitting
-  event.preventDefault(firstName)
+  event.preventDefault(firstName);
 
-  // First Name
-    // Check if it is long enough
-    if (firstName.value.length < 3) {
-      errorName.classList.add('d-block');
-      errorName.classList.add('invalid-feedback');
-      firstName.classList.add('border-danger')
-    }
-    // Check if it contains numbers 
-    if (firstName.value.match(/\d+/g) != null) {
-      errorName.classList.add('d-block');
-      errorName.classList.add('invalid-feedback');
-      firstName.classList.add('border-danger');
-      
-    }
-    // Hide error message if the above checks have been passed
-    if (firstName.value.length >= 3 && firstName.value.match(/\d+/g) == null) {
-      errorName.classList.remove('d-block')
-      firstName.classList.remove('border-danger');        
-    } 
-
-  // Last Name
-    // Check if the last name is long enough
-    if (lastName.value.length < 3) {
-      errorLastName.classList.add('d-block');
-      errorLastName.classList.add('invalid-feedback');
-      lastName.classList.add('border-danger')
-    }
-    // Check if it contains numbers 
-    if (lastName.value.match(/\d+/g) != null) {
-      errorLastName.classList.add('d-block');
-      errorLastName.classList.add('invalid-feedback');
-      errorLastName.classList.add('border-danger');
-      
-    }
-    // Hide error message if the above checks have been passed
-    if (lastName.value.length >= 3 && lastName.value.match(/\d+/g) == null) {
-      errorLastName.classList.remove('d-block')
-      errorLastName.classList.remove('border-danger'); 
-    }
-
-  // Email
-    // Check if the format is a valid email format
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value) == false) {
-      errorEmail.classList.add('d-block');
-      errorEmail.classList.add('invalid-feedback');
-      errorEmail.classList.add('border-danger');
-    }
-    // Hide error message if format is valid 
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
-      errorEmail.classList.remove('d-block')
-      errorEmail.classList.remove('border-danger');     
-    }
-
-  // Password
-    // Check if it´s 3 characters long at least
-    if (password.value.length < 3) {
-      errorPassword.classList.add('d-block');
-      errorPassword.classList.add('invalid-feedback');
-      errorPassword.classList.add('border-danger');      
-    }
-    // Check if it contains letters
-    if (password.value.match(/[A-Za-z]/g) != null) {
-      errorPassword.classList.add('d-block');
-      errorPassword.classList.add('invalid-feedback');
-      password.classList.add('border-danger');      
-    }
-    // Check if it contains numbers
-    if (password.value.match(/\d+/g) != null) {
-      errorPassword.classList.add('d-block');
-      errorPassword.classList.add('invalid-feedback');
-      password.classList.add('border-danger');
-      
-    }
-    // Hide error message if the password passes all of the above checks
-    if ((password.value.length >= 3) && (password.value.match(/[A-Za-z]/g) !== null) && (password.value.match(/\d+/g) !== null)) {
-      password.classList.remove('border-danger');
-      errorPassword.classList.remove('d-block');      
-    } 
-
-  // Phone
-    // Checks if length is ok
-    if (phone.value.length < 3) {
-      errorPhone.classList.add('d-block');
-      errorPhone.classList.add('invalid-feedback');
-      phone.classList.add('border-danger');
-    }    
+  // -- First Name --
+  // Check if name is 3 characters long at least & does not contains numbers or special characters
+  // RegExp "test()" method --> tests for a match in a string, returns true or false
+  if (
+    firstName.value.length < 3 ||
+    /^[a-z ,.'-]+$/i.test(firstName.value) == false
+  ) {
+    errorName.classList.add("d-block");
+    errorName.classList.add("invalid-feedback");
+    firstName.classList.add("border-danger");
+  }
+  // Hide error message if the above checks have been passed
+  if (
+    firstName.value.length >= 3 &&
+    /^[a-z ,.'-]+$/i.test(firstName.value) == true
+  ) {
+    errorName.classList.remove("d-block");
+    firstName.classList.remove("border-danger");
+    firstName.classList.add("border-success");
+  }
+  // -- Last Name --
+  // Check if last name is 3 characters long at least & doesn´t contain numbers or special chars...
+  if (
+    lastName.value.length < 3 ||
+    /^[a-z ,.'-]+$/i.test(lastName.value) == false
+  ) {
+    errorLastName.classList.add("d-block");
+    errorLastName.classList.add("invalid-feedback");
+    lastName.classList.add("border-danger");
+  }
+  // Hide error message if the above checks have been passed
+  if (
+    lastName.value.length >= 3 &&
+    /^[a-z ,.'-]+$/i.test(lastName.value) == true
+  ) {
+    errorLastName.classList.remove("d-block");
+    lastName.classList.remove("border-danger");
+    lastName.classList.add("border-success");
+  }
+  // -- Email --
+  // Check if the format is a valid email format, like name@example.com
+  if (
+    /^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$/gm.test(
+      email.value
+    ) == false
+  ) {
+    errorEmail.classList.add("d-block");
+    errorEmail.classList.add("invalid-feedback");
+    email.classList.add("border-danger");
+  }
+  // Hide error message if format is valid
+  if (
+    /^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$/gm.test(
+      email.value
+    ) == true
+  ) {
+    errorEmail.classList.remove("d-block");
+    email.classList.remove("border-danger");
+    email.classList.add("border-success");
+  }
+  // -- Password --
+  // Check if it´s minimum 8 characters long, at least 1 letter, 1 number & 1 special character
+  if (
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/gm.test(
+      password.value
+    ) == false
+  ) {
+    errorPassword.classList.add("d-block");
+    errorPassword.classList.add("invalid-feedback");
+    password.classList.add("border-danger");
+  }
+  // Hide error message if format is valid
+  if (
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/gm.test(
+      password.value
+    ) == true
+  ) {
+    errorPassword.classList.remove("d-block");
+    password.classList.remove("border-danger");
+    password.classList.add("border-success");
+  }
+  // -- Phone --
+  // Checks if it's 9 digits long
+  if (/^\d{9}$/gm.test(phone.value) == false) {
+    errorPhone.classList.add("d-block");
+    errorPhone.classList.add("invalid-feedback");
+    phone.classList.add("border-danger");
+  }
   // Hide error message if the above check has been passed
-    if (phone.value.length >= 3) {
-      phone.classList.remove('border-danger');
-      errorPhone.classList.remove('d-block');
-    }
-      
-  // Address
-    // Check if it's 3 characters long at least
-    if (address.value.length < 3) {
-      errorAddress.classList.add('d-block')
-      errorAddress.classList.add('invalid-feedback')
-      address.classList.add('border-danger')
-      
-    }
-    // Hide error message if above check has been passed
-    if (address.value.length >= 3) {
-      errorAddress.classList.remove('border-danger');
-      errorAddress.classList.remove('d-block');
-    }  
+  if (/^\d{9}$/gm.test(phone.value) == true) {
+    errorPhone.classList.remove("d-block");
+    phone.classList.remove("border-danger");
+    phone.classList.add("border-success");
+  }
+  // -- Address --
+  // Check if it's 3 characters long at least
+  if (address.value.length < 3) {
+    errorAddress.classList.add("d-block");
+    errorAddress.classList.add("invalid-feedback");
+    address.classList.add("border-danger");
+  }
+  // Hide error message if above check has been passed
+  if (address.value.length >= 3) {
+    errorAddress.classList.remove("border-danger");
+    errorAddress.classList.remove("d-block");
+    address.classList.add("border-success");
+  }
 }
