@@ -62,7 +62,7 @@ function validate(event) {
     lastName.classList.add("border-success");
   }
   // -- Email --
-  // Check if the format is a valid email format, like name@example.com
+  // Check for a valid email format, like name@example.com
   if (
     /^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$/gm.test(
       email.value
@@ -83,7 +83,7 @@ function validate(event) {
     email.classList.add("border-success");
   }
   // -- Password --
-  // Check if it´s minimum 8 characters long, at least 1 letter, 1 number & 1 special character
+  // Check if it´s 8 characters long, at least 1 letter, 1 number & 1 special character
   if (
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/gm.test(
       password.value
