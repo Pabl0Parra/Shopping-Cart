@@ -1,6 +1,6 @@
-# **Shopping-Cart Project**
+# :convenience_store: **Shopping-Cart Project**
 
-## Level 1
+## :star2: Level 1
 
 ---
 
