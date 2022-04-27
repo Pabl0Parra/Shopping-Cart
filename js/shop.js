@@ -68,7 +68,7 @@ function generateCart() {
       }
     }
   }
-  return cart;
+  // return cart;
 }
 
 // Exercise 5
@@ -92,7 +92,7 @@ function applyPromotionsCart() {
     //in case product does not have a discount
     alert("There is no discount for the selected item(s)");
   }
-  return cart;
+  // return cart;
 }
 
 // ** Nivell II **
@@ -101,7 +101,25 @@ function applyPromotionsCart() {
 function addToCart(id) {
   // Refactor previous code in order to simplify it
   // 1. Loop for to the array products to get the item to add to cart
-  // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+  for (let i = 0; i < products.length; i++) {
+    // if the button id is the same than the product id we are working with at the moment
+    if (id == products[i].id) {
+      // Select the product we are working with & assign its value to a variable(products[i])
+      
+      // 2. Add found product to the cart array or update its quantity in case it has been previously added .
+      // If the product is already in cart(cart.includes), find it(cart.find), store it in productExists & increase quantity by 1 only if it´s already in cart.
+      if (cart.includes(products[i])) {
+        let productExists = cart.find(x => x.id == products[i].id);
+        productExists.quantity++
+      }
+      // If the product is not in cart(!cart.includes), set quantity to 1 and add it to cart
+      if (!cart.includes(products[i])) {
+        products[i].quantity = 1;
+        cart.push(products[i])
+      }
+    }
+  }
+  return cart
 }
 
 // Exercise 8
