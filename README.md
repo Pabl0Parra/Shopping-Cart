@@ -146,3 +146,29 @@ We can stop using buy() and generateCart() ( don't delete them, for easy fix ), 
 Sometimes it is somewhat tedious to refactor code, but **code** must be **cleaned** to make it more maintainable.
 
 _Help: Keep in mind that you must validate if the product already exists in the cart array, to update its quantity, or add it if it is not yet part of that cart array._
+
+### Exercise 8
+
+---
+
+!! Congratulations!! you already have the main parts of the shop implemented! in levels 2 and 3 we will complete the store with some functionalities and creating the graphic part.
+
+We have not yet provided a very important functionality to the user: subtract products from the cart.
+
+You have to complete the removeFromCart() function, which receives the id of the product whose quantity should be decremented by one unit.
+
+Keep in mind that if the quantity of the product to decrease is 1, you must remove it from the cart, not change its quantity to 0.
+
+_Help: Guarantee that your code does not give an error if a product that the user wants to decrease its quantity is not in the cart._
+
+### Exercise 9
+
+---
+
+You have already developed all the basic logic of the application, the time has come to show the user the shopping cart because they want to see the changes.
+
+The code in charge of displaying the shopping cart in the modal with id "cartModal", must be included inside the printCart() function.
+
+The cart modal is opened by clicking the cart button in the upper right corner of the screen:
+
+![cart_modal](./images/cart-modal.png)
