@@ -64,7 +64,7 @@ function validate(event) {
   // -- Email --
   // Check for a valid email format, like name@example.com
   if (
-    /^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$/gm.test(
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gm.test(
       email.value
     ) == false
   ) {
@@ -74,7 +74,7 @@ function validate(event) {
   }
   // Hide error message if format is valid
   if (
-    /^(?=[^A-Z\n]*[A-Z])(?=[^a-z\n]*[a-z])(?=[^0-9\n]*[0-9])(?=[^#?!@$%^&*\n-]*[#?!@$%^&*-]).{8,}$/gm.test(
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gm.test(
       email.value
     ) == true
   ) {
@@ -125,8 +125,9 @@ function validate(event) {
   }
   // Hide error message if above check has been passed
   if (address.value.length >= 3) {
-    errorAddress.classList.remove("border-danger");
+    
     errorAddress.classList.remove("d-block");
+    address.classList.remove("border-danger");
     address.classList.add("border-success");
   }
 }
