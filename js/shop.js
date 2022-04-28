@@ -90,10 +90,7 @@ function applyPromotionsCart() {
         cart[i]["subtotalWithDiscount"] =
           Math.round(((cart[i].subtotal * 2) / 3) * 100) / 100;
       }
-    }
-  } else {
-    //in case product does not have a discount
-    alert("There is no discount for the selected item(s)");
+    }  
   }
   // return cart;
 }
@@ -129,8 +126,26 @@ function addToCart(id) {
 
 // Exercise 8
 function removeFromCart(id) {
-  // 1. Loop for to the array products to get the item to add to cart
-  // 2. Add found product to the cartList array
+  let cartCounterAfterDeletion= parseInt(cartCounter.innerText)
+  // 1. For loop of cart to get the desired item remove from cart
+  for (let i = 0; i < cart.length; i++) {
+    if (id == cart[i].id) {
+      let productToBeRemoved = cart[i];
+      // If there is only one in cart
+      if (productToBeRemoved.quantity == 1) {
+        // Remove the product from the cartList array
+        cart.splice(i, 1)
+        cartCounterAfterDeletion--
+      }
+      // If there are more than 1 in cart
+      if (productToBeRemoved.quantity > 1) {
+        // Reduce quantity by 1
+        productToBeRemoved.quantity = productToBeRemoved.quantity - 1
+        cartCounterAfterDeletion--
+      }
+    }
+  }  
+  cartCounter.innerHTML = cartCounterAfterDeletion
 }
 
 // Exercise 9
