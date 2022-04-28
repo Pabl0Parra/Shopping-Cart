@@ -31,11 +31,11 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
-  // for loop to add all the products picked
+  //  for loop to add all the products picked
   for (let i = 0; i < cartList.length; i++) {
     total += cartList[i].price;
   }
-  return `The total price is $${total}`;
+  return `The total price is $${total}`;  
 }
 
 // Exercise 4
@@ -49,7 +49,7 @@ function generateCart() {
     if (cart.length === 0) {
       cart.push(cartList[i]);
       cart[i]["quantity"] = 1;
-      cart[i]["subtotal"] = cart[i].price * cart[i].quantity;
+      cart[i]["subTotal"] = cart[i].price * cart[i].quantity;
     } else {
       let j = 0;
       let idExists = false;
@@ -65,7 +65,7 @@ function generateCart() {
       }
       //if cart is not empty but the product is not in cart, add product and its quantity
       if (!idExists) {
-        // clone the cartList array so that we don´t add quantity key to it
+        // clone the cartList array so that we don´t add the quantity key to it
         cart.push({...cartList[i]});
         cart[cart.length - 1]["quantity"] = 1; // cart.lenght - 1 to avoid off-by-one error
       }
@@ -77,22 +77,34 @@ function generateCart() {
 // Exercise 5
 function applyPromotionsCart() {
   // Apply promotions to each item in the array "cart"
-  if (generateCart().length > 0) {
-    // loop to itirate through the cart array
-    for (let i = 0; i < cart.length; i++) {
-      //added the subtotal key to element
-      cart[i]["subtotal"] = cart[i].price * cart[i].quantity;
-      //discount conditions for item 1
-      if (cart[i].id === 1 && cart[i].quantity >= 3) {
-        cart[i]["subtotalWithDiscount"] = cart[i].quantity * 10;
-        //discount conditions for item 3
-      } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
-        cart[i]["subtotalWithDiscount"] =
-          Math.round(((cart[i].subtotal * 2) / 3) * 100) / 100;
-      }
-    }  
-  }
+  // if (generateCart().length > 0) {
+  //   // loop to itirate through the cart array
+  //   for (let i = 0; i < cart.length; i++) {
+  //     //added the subTotal key to element
+  //     cart[i]["subTotal"] = cart[i].price * cart[i].quantity;
+  //     //discount conditions for item 1
+  //     if (cart[i].id === 1 && cart[i].quantity >= 3) {
+  //       cart[i]["subTotalWithDiscount"] = cart[i].quantity * 10;
+  //       //discount conditions for item 3
+  //     } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
+  //       cart[i]["subTotalWithDiscount"] =
+  //         Math.round(((cart[i].subTotal * 2) / 3) * 100) / 100;
+  //     }
+  //   }  
+  // }
   // return cart;
+
+  // LEVEL 2
+  if (cart.length > 0) {
+    // Array.map() method to iterate the array & apply the discounts if proceeds
+    cart.map(product => {
+      product['subTotal'] = product.price * product.quantity;
+        if (product.quantity >= product.offer.number) {
+          product['subTotalWithDiscount'] = Math.ceil(product.subTotal*(1-product.offer.percent/100));
+        }
+        
+    });
+  }
 }
 
 // ** Nivell II **
@@ -120,37 +132,60 @@ function addToCart(id) {
       }
     }
   }
+  applyPromotionsCart()
+
+  calculateTotal()
+
   cart.forEach(e => totalProductsUnits += e.quantity)
-    cartCounter.innerHTML = totalProductsUnits;
+  cartCounter.innerHTML = totalProductsUnits;
+    
+  return cart
+
+  
 }
 
 // Exercise 8
 function removeFromCart(id) {
+  //parseInt to convert the string to a number
   let cartCounterAfterDeletion= parseInt(cartCounter.innerText)
   // 1. For loop of cart to get the desired item remove from cart
   for (let i = 0; i < cart.length; i++) {
+    // if both id´s match...
     if (id == cart[i].id) {
+      //declare a variable with cart[i] value to make code more readable
       let productToBeRemoved = cart[i];
-      // If there is only one in cart
+      // If there is only 1 in cart...
       if (productToBeRemoved.quantity == 1) {
-        // Remove the product from the cartList array
-        cart.splice(i, 1)
+        // Remove the product from cart array using array.splice() method
+        cart.splice(productToBeRemoved, 1)
         cartCounterAfterDeletion--
       }
-      // If there are more than 1 in cart
+      // If there are more than 1 in cart...
       if (productToBeRemoved.quantity > 1) {
         // Reduce quantity by 1
         productToBeRemoved.quantity = productToBeRemoved.quantity - 1
         cartCounterAfterDeletion--
+          if(productToBeRemoved.id = 1 && productToBeRemoved.quantity < 3) {
+            delete productToBeRemoved.subTotalWithDiscount
+          }
+          if(productToBeRemoved.id = 3 && productToBeRemoved.quantity < 10) {
+            delete productToBeRemoved.subTotalWithDiscount
+          }
+          
       }
     }
   }  
   cartCounter.innerHTML = cartCounterAfterDeletion
+
+  return cart
+  
 }
 
 // Exercise 9
 function printCart() {
   // Fill the shopping cart modal manipulating the shopping cart dom
+
+  
 }
 
 function open_modal() {
