@@ -7,6 +7,8 @@ let cartList = [];
 let cart = [];
 
 let total = 0;
+// declare a variable to later display its value in cart badge
+let cartCounter = document.getElementById('count_product')
 
 // Exercise 1
 function buy(id) {
@@ -63,7 +65,8 @@ function generateCart() {
       }
       //if cart is not empty but the product is not in cart, add product and its quantity
       if (!idExists) {
-        cart.push(cartList[i]);
+        // clone the cartList array so that we don´t add quantity key to it
+        cart.push({...cartList[i]});
         cart[cart.length - 1]["quantity"] = 1; // cart.lenght - 1 to avoid off-by-one error
       }
     }
@@ -100,6 +103,7 @@ function applyPromotionsCart() {
 // Exercise 7
 function addToCart(id) {
   // Refactor previous code in order to simplify it
+  let totalProductsUnits = 0
   // 1. Loop for to the array products to get the item to add to cart
   for (let i = 0; i < products.length; i++) {
     // if the button id is the same than the product id we are working with at the moment
@@ -119,7 +123,8 @@ function addToCart(id) {
       }
     }
   }
-  return cart
+  cart.forEach(e => totalProductsUnits += e.quantity)
+    cartCounter.innerHTML = totalProductsUnits;
 }
 
 // Exercise 8
