@@ -5,13 +5,12 @@ let cartList = [];
 let cart = [];
 
 let total = 0;
-// declare a letiable to later display its value in cart badge
+// declare a variable to later display its value in cart badge
 let cartCounter = document.getElementById("count_product");
 
 // Exercise 1
 function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
-
   for (let i = 0; i < products.length; i++) {
     // 2. Add found product to the cartList array
     if (id == products[i].id) {
@@ -164,7 +163,7 @@ function removeFromCart(id) {
         productToBeRemoved.quantity = productToBeRemoved.quantity - 1;
         //substract 1 from badge counter
         cartCounterSubstract--;
-        // if the products w/discount don´t much min quantity for disc...remove key "subTotalWithDiscount"
+        // if the products don´t match min quantity for discount --> remove key "subTotalWithDiscount"
         if (productToBeRemoved.id === 1 || productToBeRemoved.id === 3) {
           if (productToBeRemoved.quantity < productToBeRemoved.offer.number)
             delete productToBeRemoved.subTotalWithDiscount;
@@ -181,13 +180,13 @@ function removeFromCart(id) {
 // Exercise 9
 
 function printCart() {
-  const DOM_LIST = document.getElementById("modal__cartList--items");
-  const DOM_MODAL_TITTLE = document.getElementById("modal__cart--title");
-  const DOM_TOTAL = document.getElementById("totalExpenses");
+  const LIST = document.getElementById("cart-modal-list-Items");
+  const TITTLE = document.getElementById("cart-modal-title");
+  const TOTAL = document.getElementById("totalExpenses");
   let printProduct = "";
 
   if (cart.length !== 0) {
-    DOM_MODAL_TITTLE.innerHTML = "Current products in your cart";
+    TITTLE.innerHTML = "Current products in your cart:";
   }
 
   for (let productProperties of cart) {
@@ -201,13 +200,13 @@ function printCart() {
         }</span>
         </div>
         <p class="text-muted">Subtotal ${
-          // nullish coleascing operator to pick subTotalWithDiscount if the product applies to promotions
+          // ?? operator to choose which price to pick (discounted or not)
           productProperties.subTotalWithDiscount ?? productProperties.subTotal
         }€</p>
         </li>`;
   }
-  DOM_LIST.innerHTML = printProduct;
-  DOM_TOTAL.innerHTML = `Total: ${calculateTotal()}€`;
+  LIST.innerHTML = printProduct;
+  TOTAL.innerHTML = `Total: ${calculateTotal()}€`;
 }
 function open_modal() {
   printCart();
