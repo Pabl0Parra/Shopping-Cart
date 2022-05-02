@@ -29,9 +29,11 @@ function cleanCart() {
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
   //  for loop to add all the products picked
-  for (let i = 0; i < cart.length; i++) {
-    total += cart[i].price;
-  }
+  // for (let i = 0; i < cartList.length; i++) {
+  //   total += cartList[i].price ;
+  // }
+  // return total;
+  cart.map((e) => (total += e.subTotalWithDiscount ?? e.subTotal));
   return total;
 }
 
