@@ -345,6 +345,7 @@
       </div>
     </footer>
 
+    <!-- Modal -->
     <div
       class="modal fade"
       id="cartModal"
@@ -369,8 +370,12 @@
             <div>
               <ul class="list"></ul>
               <div>
-                <h3 class="text-center bill px-5">Select Something</h3>
+                <h3 id="modal__cart--title" class="text-center bill px-5">
+                  Please, select a product prior to checkout
+                </h3>
               </div>
+              <ul id="modal__cartList--items" class="list"></ul>
+              <p id="totalExpenses" class="fw-bold text-start"></p>
               <div class="text-center">
                 <a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
               </div>

@@ -5,7 +5,7 @@ let cartList = [];
 let cart = [];
 
 let total = 0;
-// declare a variable to later display its value in cart badge
+// declare a letiable to later display its value in cart badge
 let cartCounter = document.getElementById("count_product");
 
 // Exercise 1
@@ -30,10 +30,10 @@ function cleanCart() {
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
   //  for loop to add all the products picked
-  for (let i = 0; i < cartList.length; i++) {
-    total += cartList[i].price;
+  for (let i = 0; i < cart.length; i++) {
+    total += cart[i].price;
   }
-  return `The total price is $${total}`;
+  return total;
 }
 
 // Exercise 4
@@ -134,8 +134,7 @@ function addToCart(id) {
   }
   applyPromotionsCart();
 
-  calculateTotal();
-
+  //generate the number of units for the cart badge
   cart.forEach((e) => (totalProductsUnits += e.quantity));
   cartCounter.innerHTML = totalProductsUnits;
 
@@ -150,7 +149,7 @@ function removeFromCart(id) {
   for (let i = 0; i < cart.length; i++) {
     // if both id´s match...
     if (id == cart[i].id) {
-      //declare a variable with cart[i] value to make code more readable
+      //declare a letiable with cart[i] value to make code more readable
       let productToBeRemoved = cart[i];
       // If there is only 1 in cart...
       if (productToBeRemoved.quantity == 1) {
@@ -180,10 +179,36 @@ function removeFromCart(id) {
 }
 
 // Exercise 9
-function printCart() {
-  // Fill the shopping cart modal manipulating the shopping cart dom
-}
 
+function printCart() {
+  const DOM_LIST = document.getElementById("modal__cartList--items");
+  const DOM_MODAL_TITTLE = document.getElementById("modal__cart--title");
+  const DOM_TOTAL = document.getElementById("totalExpenses");
+  let printProduct = "";
+
+  if (cart.length !== 0) {
+    DOM_MODAL_TITTLE.innerHTML = "Current products in your cart";
+  }
+
+  for (let productProperties of cart) {
+    printProduct += `<li class="row align-items-baseline">
+        <i class="bi bi-bag-check-fill col-1"></i>
+        <h6 class="col-11"> ${productProperties.name}</h6>
+        <p class="text-muted col-4">Quantity:</p>
+        <div class="col-4">
+        <span class="badge bg-dark rounded-pill">${
+          productProperties.quantity
+        }</span>
+        </div>
+        <p class="text-muted">Subtotal ${
+          // nullish coleascing operator to pick subTotalWithDiscount if the product applies to promotions
+          productProperties.subTotalWithDiscount ?? productProperties.subTotal
+        }€</p>
+        </li>`;
+  }
+  DOM_LIST.innerHTML = printProduct;
+  DOM_TOTAL.innerHTML = `Total: ${calculateTotal()}€`;
+}
 function open_modal() {
-  console.log("Open Modal");
+  printCart();
 }
