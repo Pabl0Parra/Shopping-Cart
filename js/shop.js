@@ -70,7 +70,7 @@ function generateCart() {
       }
     }
   }
-   return cart;
+    // return cart;
 }
 
 // Exercise 5
@@ -182,6 +182,9 @@ function removeFromCart(id) {
 // Exercise 9
 
 function printCart() {
+  // so that the cart does not stack every time the addToCart button is pressed
+  total = 0;
+  
   const LIST = document.getElementById("cart-modal-list-Items");
   const TITTLE = document.getElementById("cart-modal-title");
   const TOTAL = document.getElementById("totalExpenses");
