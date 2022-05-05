@@ -70,7 +70,7 @@ function generateCart() {
       }
     }
   }
-    // return cart;
+     return cart;
 }
 
 // Exercise 5
